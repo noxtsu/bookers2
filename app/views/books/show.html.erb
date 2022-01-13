@@ -2,7 +2,7 @@
   <div class"row">
     <div class="col-md-3">
       <h2>Users info</h2>
-      <img class="attachment user profile_image fallback" src="/app/assets/images/no_image.jpg">
+      <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format:'jpeg', fallback: "no_image.jpg" %>
       <table class="table table-striped">
         <tr>
           <td>name</td>
@@ -30,7 +30,7 @@
       <h2>Books detail</h2>
       <table class="table table-hover table-inverse">
         <tr>
-          <td></td>
+          <td><%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format:'jpeg', fallback:"no_image.jpg" %></td>
           <td><%= @book.title %></td>
           <td><%= @book.body %></td>
           <td><%= link_to "Edit", edit_book_path(@book) %></td>

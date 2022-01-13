@@ -10,6 +10,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @book_new = Book.new
     @book = Book.find(params[:id])
+    @book.save
+    redirect_to user_path(@user.id), notice: "Book was successfully created."
   end
   
 
@@ -24,5 +26,11 @@ class UsersController < ApplicationController
     
   end
   
+  private
+  
+  def user_params
+    params.require(:user).permit(:name, :profile_image, :introduction)
+  end
+
   
 end

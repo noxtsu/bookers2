@@ -1,5 +1,10 @@
 class BooksController < ApplicationController
   
+  def index
+    @books = Book.all
+    
+  end
+  
   def create
     @book = Book.new(book_params)
     @book.user_id = current_user.id
@@ -7,10 +12,6 @@ class BooksController < ApplicationController
     redirect_to book_path(@book.id), notice: "Book was successfully created."
   end
   
-  def index
-    @books = Book.all
-    
-  end
 
   def show
     @book_new = Book.new
