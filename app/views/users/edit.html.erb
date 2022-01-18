@@ -1,3 +1,18 @@
+
+
+<main>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+          <% if @user.errors.any? %>
+          <%= @user.errors.count %> error prohibited this obj from being saved:
+          <ul>
+            <% @user.errors.full_messages.each do |message| %>
+             <li><%= message %></li>
+            <% end %>
+          </ul>
+          <% end %>
+          
 <h1>User info</h1>
 <%= form_with model:@user, local: true do |f| %>
   <h4>Name</h4>
@@ -8,8 +23,12 @@
 
 
   <h4>Introduction</h4>
-  <%= f.text_area:introduction %>
+  <%= f.text_area:introduction %><br>
   
   
-  <%= f.submit 'Update User' %>
+  <input type="submit" name="commit" value="Update User" class="btn btn-secondary" data-disable-with="Update User">
  <% end %>
+         <div></div>   
+       </div>
+    </div>
+ </main>

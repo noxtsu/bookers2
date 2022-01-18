@@ -1,4 +1,12 @@
 class UsersController < ApplicationController
+before_action :ensure_correct_user, only:[:edit]
+
+   def ensure_correct_user
+    @user = User.find(params[:id])
+     unless @user == current_user
+     redirect_to users_path
+     end
+   end
 
   def index
     @users = User.all
@@ -9,8 +17,7 @@ class UsersController < ApplicationController
     @users = User.all
     @user = User.find(params[:id])
     @book_new = Book.new
-    @books = Book.all
-    @books = Book.find(params[:id])
+    @books = @user.books
     #@book.save
     #redirect_to user_path(@user.id), notice: "Book was successfully created."
   end
@@ -22,8 +29,11 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.update(user_params)
-    redirect_to user_path(@user.id)
+    if @user.update(user_params)
+      redirect_to user_path(@user.id), notice: "You have updated user successfully."
+    else
+      render :edit
+    end
 
   end
 
